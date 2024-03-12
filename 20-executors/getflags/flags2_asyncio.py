@@ -47,7 +47,10 @@ async def download_one(client: httpx.AsyncClient,
     else:
         #await asyncio.to_thread(save_flag, image, f'{cc}.gif')  # <5>
         # to_thread was added in python3.9, we use 3.8
-        save_flag(image, f'{cc}.gif')
+        # =================== For Python3.8==========================
+        loop = asyncio.get_running_loop()
+        loop.run_in_executor(None, save_flag, image, f'{cc}.gif')
+        # =================== For Python3.8 end=======================
         status = DownloadStatus.OK
         msg = 'OK'
     if verbose and msg:

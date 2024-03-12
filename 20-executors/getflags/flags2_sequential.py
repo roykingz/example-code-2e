@@ -57,10 +57,14 @@ def download_one(cc: str, base_url: str, verbose: bool = False) -> DownloadStatu
 # end::FLAGS2_BASIC_HTTP_FUNCTIONS[]
 
 # tag::FLAGS2_DOWNLOAD_MANY_SEQUENTIAL[]
-def download_many(cc_list: list[str],
+""" def download_many(cc_list: list[str],
                   base_url: str,
                   verbose: bool,
-                  _unused_concur_req: int) -> Counter[DownloadStatus]:
+                  _unused_concur_req: int) -> Counter[DownloadStatus]: """
+def download_many(cc_list: list,
+                  base_url: str,
+                  verbose: bool,
+                  _unused_concur_req: int) -> Counter:
     counter: Counter[DownloadStatus] = Counter()  # <1>
     cc_iter = sorted(cc_list)  # <2>
     if not verbose:

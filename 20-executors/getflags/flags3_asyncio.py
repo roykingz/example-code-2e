@@ -69,10 +69,14 @@ async def download_one(client: httpx.AsyncClient,
 # end::FLAGS3_ASYNCIO_DOWNLOAD_ONE[]
 
 # tag::FLAGS2_ASYNCIO_START[]
-async def supervisor(cc_list: list[str],
+""" async def supervisor(cc_list: list[str],
                      base_url: str,
                      verbose: bool,
-                     concur_req: int) -> Counter[DownloadStatus]:  # <1>
+                     concur_req: int) -> Counter[DownloadStatus]:  # <1> """
+async def supervisor(cc_list: list,
+                     base_url: str,
+                     verbose: bool,
+                     concur_req: int) -> Counter:  # <1>
     counter: Counter[DownloadStatus] = Counter()
     semaphore = asyncio.Semaphore(concur_req)  # <2>
     async with httpx.AsyncClient() as client:
@@ -105,10 +109,14 @@ async def supervisor(cc_list: list[str],
 
     return counter
 
-def download_many(cc_list: list[str],
+""" def download_many(cc_list: list[str],
                   base_url: str,
                   verbose: bool,
-                  concur_req: int) -> Counter[DownloadStatus]:
+                  concur_req: int) -> Counter[DownloadStatus]: """
+def download_many(cc_list: list,
+                  base_url: str,
+                  verbose: bool,
+                  concur_req: int) -> Counter:
     coro = supervisor(cc_list, base_url, verbose, concur_req)
     counts = asyncio.run(coro)  # <14>
 

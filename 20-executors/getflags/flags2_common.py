@@ -33,7 +33,8 @@ def save_flag(img: bytes, filename: str) -> None:
     (DEST_DIR / filename).write_bytes(img)
 
 
-def initial_report(cc_list: list[str],
+#def initial_report(cc_list: list[str],
+def initial_report(cc_list: list,
                    actual_req: int,
                    server_label: str) -> None:
     if len(cc_list) <= 10:
@@ -49,8 +50,11 @@ def initial_report(cc_list: list[str],
         print(f'{actual_req} concurrent connections will be used.')
 
 
-def final_report(cc_list: list[str],
+""" def final_report(cc_list: list[str],
                  counter: Counter[DownloadStatus],
+                 start_time: float) -> None: """
+def final_report(cc_list: list,
+                 counter: Counter,
                  start_time: float) -> None:
     elapsed = time.perf_counter() - start_time
     print('-' * 20)
@@ -64,10 +68,14 @@ def final_report(cc_list: list[str],
     print(f'Elapsed time: {elapsed:.2f}s')
 
 
-def expand_cc_args(every_cc: bool,
+""" def expand_cc_args(every_cc: bool,
                    all_cc: bool,
                    cc_args: list[str],
-                   limit: int) -> list[str]:
+                   limit: int) -> list[str]: """
+def expand_cc_args(every_cc: bool,
+                   all_cc: bool,
+                   cc_args: list,
+                   limit: int) -> list:
     codes: set[str] = set()
     A_Z = string.ascii_uppercase
     if every_cc:

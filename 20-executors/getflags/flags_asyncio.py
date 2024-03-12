@@ -31,10 +31,12 @@ async def get_flag(client: AsyncClient, cc: str) -> bytes:  # <4>
 # end::FLAGS_ASYNCIO_TOP[]
 
 # tag::FLAGS_ASYNCIO_START[]
-def download_many(cc_list: list[str]) -> int:    # <1>
+#def download_many(cc_list: list[str]) -> int:    # <1>
+def download_many(cc_list: list) -> int:    # <1>
     return asyncio.run(supervisor(cc_list))      # <2>
 
-async def supervisor(cc_list: list[str]) -> int:
+# async def supervisor(cc_list: list[str]) -> int:
+async def supervisor(cc_list: list) -> int:
     async with AsyncClient() as client:          # <3>
         to_do = [download_one(client, cc)
                  for cc in sorted(cc_list)]      # <4>

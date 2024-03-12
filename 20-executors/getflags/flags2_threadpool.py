@@ -32,10 +32,14 @@ DEFAULT_CONCUR_REQ = 30  # <2>
 MAX_CONCUR_REQ = 1000  # <3>
 
 
-def download_many(cc_list: list[str],
+""" def download_many(cc_list: list[str],
                   base_url: str,
                   verbose: bool,
-                  concur_req: int) -> Counter[DownloadStatus]:
+                  concur_req: int) -> Counter[DownloadStatus]: """
+def download_many(cc_list: list,
+                  base_url: str,
+                  verbose: bool,
+                  concur_req: int) -> Counter:
     counter: Counter[DownloadStatus] = Counter()
     with ThreadPoolExecutor(max_workers=concur_req) as executor:  # <4>
         to_do_map = {}  # <5>

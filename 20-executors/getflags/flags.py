@@ -23,10 +23,16 @@ from typing import Callable
 
 import httpx  # <1>
 
-POP20_CC = ('CN IN US ID BR PK NG BD RU JP '
+
+#POP20_CC = ('CN IN US ID BR PK NG BD RU JP '
+#            'MX PH VN ET EG DE IR TR CD FR').split()  # <2>
+
+# replaced CN with GN, because mp.ituring.com.cn has no CN flags (Politics...)
+POP20_CC = ('GN IN US ID BR PK NG BD RU JP '
             'MX PH VN ET EG DE IR TR CD FR').split()  # <2>
 
-BASE_URL = 'https://www.fluentpython.com/data/flags'  # <3>
+#BASE_URL = 'https://www.fluentpython.com/data/flags'  # <3>
+BASE_URL = 'http://mp.ituring.com.cn/files/flags'  # <3>
 DEST_DIR = Path('downloaded')                         # <4>
 
 def save_flag(img: bytes, filename: str) -> None:     # <5>
@@ -39,14 +45,17 @@ def get_flag(cc: str) -> bytes:  # <6>
     resp.raise_for_status()  # <9>
     return resp.content
 
-def download_many(cc_list: list[str]) -> int:  # <10>
+#def download_many(cc_list: list[str]) -> int:  # <10>
+# py3.8 not support type hint like list[str]
+def download_many(cc_list: list) -> int:  # <10>
     for cc in sorted(cc_list):                 # <11>
         image = get_flag(cc)
         save_flag(image, f'{cc}.gif')
         print(cc, end=' ', flush=True)         # <12>
     return len(cc_list)
 
-def main(downloader: Callable[[list[str]], int]) -> None:  # <13>
+#def main(downloader: Callable[[list[str]], int]) -> None:  # <13>
+def main(downloader) -> None:  # <13>
     DEST_DIR.mkdir(exist_ok=True)                          # <14>
     t0 = time.perf_counter()                               # <15>
     count = downloader(POP20_CC)

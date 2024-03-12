@@ -40,6 +40,7 @@ def start_jobs(
     for _ in range(procs):
         proc = Process(target=worker, args=(jobs, results))  # <13>
         proc.start()  # <14>
+        # rcz: 放了procs个0到queue尾部，从而能让procs个子进程退出
         jobs.put(0)  # <15>
 # end::PRIMES_PROC_TOP[]
 

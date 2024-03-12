@@ -11,7 +11,8 @@ from flags_threadpool import download_one
 
 
 # tag::FLAGS_THREADPOOL_AS_COMPLETED[]
-def download_many(cc_list: list[str]) -> int:
+#def download_many(cc_list: list[str]) -> int:
+def download_many(cc_list: list) -> int:
     cc_list = cc_list[:5]  # <1>
     with futures.ThreadPoolExecutor(max_workers=3) as executor:  # <2>
         to_do: list[futures.Future] = []

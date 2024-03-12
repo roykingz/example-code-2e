@@ -10,6 +10,7 @@ import time
 from threading import Thread, Event
 
 def spin(msg: str, done: Event) -> None:  # <1>
+    #print('rcz spin() run first')
     for char in itertools.cycle(r'\|/-'):  # <2>
         status = f'\r{char} {msg}'  # <3>
         print(status, end='', flush=True)
@@ -19,6 +20,7 @@ def spin(msg: str, done: Event) -> None:  # <1>
     print(f'\r{blanks}\r', end='')  # <6>
 
 def slow() -> int:
+    #print('rcz slow() run first')
     time.sleep(3)  # <7>
     return 42
 # end::SPINNER_THREAD_TOP[]

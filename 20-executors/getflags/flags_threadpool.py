@@ -23,7 +23,8 @@ def download_one(cc: str):  # <2>
     print(cc, end=' ', flush=True)
     return cc
 
-def download_many(cc_list: list[str]) -> int:
+# def download_many(cc_list: list[str]) -> int:
+def download_many(cc_list: list) -> int:
     with futures.ThreadPoolExecutor() as executor:         # <3>
         res = executor.map(download_one, sorted(cc_list))  # <4>
 

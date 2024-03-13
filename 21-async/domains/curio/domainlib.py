@@ -18,7 +18,8 @@ async def probe(domain: str) -> Result:
     return Result(domain, True)
 
 
-async def multi_probe(domains: Iterable[str]) -> AsyncIterator[Result]:
+#async def multi_probe(domains: Iterable[str]) -> AsyncIterator[Result]:
+async def multi_probe(domains: Iterable) -> AsyncIterator:
     async with TaskGroup() as group:
         for domain in domains:
             await group.spawn(probe, domain)

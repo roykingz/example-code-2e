@@ -6,7 +6,8 @@ from keyword import kwlist
 MAX_KEYWORD_LEN = 4
 
 
-async def probe(domain: str) -> tuple[str, bool]:  # <1>
+#async def probe(domain: str) -> tuple[str, bool]:  # <1>
+async def probe(domain: str) -> tuple:  # <1>
     try:
         await socket.getaddrinfo(domain, None)  # <2>
     except socket.gaierror:
